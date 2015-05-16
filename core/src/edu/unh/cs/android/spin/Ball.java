@@ -12,6 +12,14 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Ball {
 
+    /* Global Variables */
+    private Colors color;
+    private String name;
+    private double addX, addY;
+    private double speedMult = 0.1;
+    private Vector2 location, speed;
+    private static Texture img;
+
     public enum Colors {
         /* use this format to add more colors */
         BLUE, RED, YELLOW, GREEN;
@@ -34,15 +42,7 @@ public class Ball {
                 default: return null;
             }
         }
-
     }
-    /* Global Variables */
-    private Colors color;
-    private String name;
-    private double speed = 1.0;
-    private double addX, addY;
-    private Vector2 location;
-    private static Texture img;
     /* Creates a specific ball or a random-colored ball */
     public Ball( int id ) {
         location = new Vector2();
@@ -61,15 +61,15 @@ public class Ball {
     public Colors getColor( ) { return color; }
 
     /* change the speed value */
-    public void setSpeed( double speed ) { this.speed = speed; }
+    public void setSpeed( Vector2 speed ) { this.speed = speed; }
 
     /* get the speed of the object */
-    public double getSpeed( ) { return speed; }
+    public Vector2 getSpeed( ) { return speed; }
 
     /* set location of ball object */
-    public void setLocation( int x, int y ) {
-        location.x = x;
-        location.y = y;
+    public void setLocation( Vector2 loc ) {
+        location.x = loc.x;
+        location.y = loc.y;
     }
 
     /* return the location of the ball object */
@@ -90,9 +90,9 @@ public class Ball {
     }
 
     /* Update addX and addY field */
-    public void setAdder(double x, double y) {
-        addX = x / 10;
-        addY = y / 10;
+    public void setAddXY(double x, double y) {
+        addX = x * speedMult;
+        addY = y * speedMult;
     }
 
 
