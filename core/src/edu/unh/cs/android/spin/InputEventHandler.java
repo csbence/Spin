@@ -35,15 +35,11 @@ public class InputEventHandler implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-//        System.out.println( "Touch down! x: " + screenX + " y: " + screenY + " button: " + button );
-//        Vector2 initVal = new Vector2( screenX, screenY );
-//        actionQueue.peek().setInitLoc(initVal);
         return false;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        System.out.println( "Touch up! x: " + screenX + " y: " + screenY + " button: " + button );
         Vector2 endVal = new Vector2( screenX, screenY );
         actionQueue.peek().setEndLoc(endVal);
         return false;

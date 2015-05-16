@@ -24,7 +24,9 @@ public class Ball {
         /* use this format to add more colors */
         BLUE, RED, YELLOW, GREEN;
 
-        /* change image of ball later */
+        /* change image of ball later
+         * and don't forget to update Bucket class for
+         * when we add more colors */
         public static Colors initBall( int num ) {
             switch( num ) {
                 case 0:
@@ -51,59 +53,58 @@ public class Ball {
         location.y = 0; addY = 0;
     }
 
-    /* Set name of Ball */
+    /** - - - - - - - - Setters - - - - - - - - **/
 
+    /* sets ID of the ball object */
     public void setName( String name ) { this.name = name; }
 
-    public String getName( ) { return name; }
-
-    /* Return the id of the ball */
-    public Colors getColor( ) { return color; }
-
-    /* change the speed value */
+    /* changes the speed field of the ball object */
     public void setSpeed( Vector2 speed ) { this.speed = speed; }
 
-    /* get the speed of the object */
-    public Vector2 getSpeed( ) { return speed; }
-
-    /* set location of ball object */
+    /* sets the location of the ball object */
     public void setLocation( Vector2 loc ) {
         location.x = loc.x;
         location.y = loc.y;
     }
 
-    /* return the location of the ball object */
-    public Vector2 getLocation( ) {
-        return location;
-    }
-
-    /* return the ball image */
-    public Texture getImage( ){
-        return img;
-    }
-
-    /* Update the location of the Ball */
+    /* updates the location of the ball object */
     public void update() {
-
         location.x += addX;
         location.y += addY;
     }
 
-    /* Update addX and addY field */
+    /* updates addX and addY field */
     public void setAddXY(double x, double y) {
         addX = x * speedMult;
         addY = y * speedMult;
     }
 
+    /** - - - - - - - - Getters - - - - - - - - **/
 
-    /**
-     * Main method to test class
-     */
+    /* returns the name of the ball */
+    public String getName( ) { return name; }
+
+    /* returns the id-color of the ball */
+    public Colors getColor( ) { return color; }
+
+    /* gets the speed of the object */
+    public Vector2 getSpeed( ) { return speed; }
+
+    /* returns the location of the ball object */
+    public Vector2 getLocation( ) {
+        return location;
+    }
+
+    /* returns the ball image */
+    public Texture getImage( ){ return img; }
+
+
+    /** - - - - - - - - Main - - - - - - - - **/
+
     public static void main( String[] args ) {
         Ball b1 = new Ball( 0 ); // put a random value here
         System.out.println( b1.color );
     }
-
 
 
 }

@@ -33,7 +33,6 @@ public class InputGestureHandler implements GestureDetector.GestureListener {
 
     @Override
     public boolean fling(float velocityX, float velocityY, int button) {
-        System.out.println("Fling! x: " + velocityX + " y: " + velocityY + " button: " + button);
         Vector2 speed = new Vector2(velocityX, velocityY);
         actionQueue.peek().setSpeed(speed);
         actionQueue.peek().setState(true);
