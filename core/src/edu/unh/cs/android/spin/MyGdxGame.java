@@ -116,22 +116,46 @@ public class MyGdxGame extends ApplicationAdapter {
             /** IMPORTANT REFACTOR THIS SHIT **/
             /* Potentially change to spawnPoints.poll() after
              * to simulate multiple spawn points */
-            double initX = spawnPoints.peek().getSpawnPoint().x;
-            double initY = spawnPoints.peek().getSpawnPoint().y;
+            double initX = actionQueue.peek().getInitLoc().x;
+            double initY = actionQueue.peek().getInitLoc().y;
             double endX = actionQueue.peek().getEndLoc().x;
             double endY = actionQueue.peek().getEndLoc().y;
 
             double diffX = endX - initX;
             double diffY = endY - initY;
+            double distance = Math.sqrt( Math.pow(diffX,2) + Math.pow(diffY,2) );
+            double angle = Math.asin(diffY / distance);
 
-//            System.out.println( "InitX: " + initX + " InitY: " + initY );
-//            System.out.println( "EndX: " + endX + " EndY: " + endY );
-//            System.out.println( "DiffX: " + diffX + " DiffY: " + diffY );
+            double aX = distance * Math.cos( angle );
+            double aY = distance * Math.sin(angle);
+
+
+            System.out.println( "InitX: " + initX + " InitY: " + initY );
+            System.out.println( "EndX: " + endX + " EndY: " + endY );
+            System.out.println( "DiffX: " + diffX + " DiffY: " + diffY );
+            System.out.println( "Angle: " + angle + " aX: " + aX + " aY: " + aY );
 
 
             /* Get the next ball in Sequence */
             if( ball != null ) {
-                ball.setAddXY( diffX, -diffY );
+                /* first quadrant */
+                if( diffX >= 0 && diffY < 0 ) {
+                    aY = -aY;
+                }
+                /* second quadrant */
+                else if( diffX < 0 && diffY < 0 ) {
+                    aX = -aX;   aY = -aY;
+                }
+                /* third quadrant */
+                else if( diffX < 0 && diffY >= 0 ) {
+                    aX = -aX;   aY = -aY;
+                }
+                /* fourth quadrant */
+                else {
+                    aY = -aY;
+                }
+
+                ball.setAddXY( aX, aY );
                 flyingBalls.add(ball);
             }
 

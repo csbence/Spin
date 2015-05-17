@@ -35,6 +35,8 @@ public class InputEventHandler implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        Vector2 initVal = new Vector2( screenX, screenY );
+        actionQueue.peek().setInitLoc(initVal);
         return false;
     }
 

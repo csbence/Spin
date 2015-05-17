@@ -5,12 +5,12 @@ import com.badlogic.gdx.math.Vector2;
 public class ActionThrow implements Action {
 
     private double angle;
-    private Vector2 speed, endLoc;
+    private Vector2 speed, endLoc, initLoc;
     private boolean state;
 
     public ActionThrow( ) {
         angle = 0.0;
-        speed = endLoc = null;
+        speed = endLoc = initLoc = null;
         state = false;
     }
 
@@ -24,6 +24,9 @@ public class ActionThrow implements Action {
 
     /* records touchUp location */
     public void setEndLoc( Vector2 end ) { endLoc = end; }
+
+    /* records touchDown location */
+    public void setInitLoc( Vector2 init ) { initLoc = init; }
 
     /* sets the state of ActionThrow
     *  when its false actionThrow has not been used yet
@@ -40,11 +43,12 @@ public class ActionThrow implements Action {
     /* gets the speed of the ball */
     public Vector2 getSpeed() { return speed; }
 
-    /* records touchdown location */
+    /* gets touchdown location */
     public Vector2 getEndLoc( ) { return endLoc; }
 
     /* checks if actionThrow has been used or not */
     public boolean getState( ) { return state; }
 
-
+    /* gets touchUp location */
+    public Vector2 getInitLoc() { return initLoc; }
 }
