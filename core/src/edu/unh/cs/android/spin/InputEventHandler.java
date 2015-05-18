@@ -1,18 +1,20 @@
 package edu.unh.cs.android.spin;
 
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.math.Vector2;
 
 import java.util.Queue;
 
 import edu.unh.cs.android.spin.action.Action;
+import edu.unh.cs.android.spin.action.ActionThrow;
 
 /**
  * @author Bence Cserna (csbence@gmail.com)
  */
 public class InputEventHandler implements InputProcessor {
-    private final Queue<Action> actionQueue;
+    private final Queue<ActionThrow> actionQueue;
 
-    public InputEventHandler(Queue<Action> actionQueue) {
+    public InputEventHandler(Queue<ActionThrow> actionQueue) {
         this.actionQueue = actionQueue;
     }
 
@@ -33,11 +35,15 @@ public class InputEventHandler implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        Vector2 initVal = new Vector2( screenX, screenY );
+        actionQueue.peek().setInitLoc(initVal);
         return false;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        Vector2 endVal = new Vector2( screenX, screenY );
+        actionQueue.peek().setEndLoc(endVal);
         return false;
     }
 

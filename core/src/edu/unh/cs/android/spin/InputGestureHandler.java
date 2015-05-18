@@ -9,10 +9,11 @@ import edu.unh.cs.android.spin.action.Action;
 import edu.unh.cs.android.spin.action.ActionThrow;
 
 public class InputGestureHandler implements GestureDetector.GestureListener {
-    private final Queue<Action> actionQueue;
+    private final Queue<ActionThrow> actionQueue;
 
-    public InputGestureHandler(Queue<Action> actionQueue) {
+    public InputGestureHandler(Queue<ActionThrow> actionQueue) {
         this.actionQueue = actionQueue;
+        System.out.println( "1ActionThrow: " + actionQueue.peek() );
     }
 
     @Override
@@ -32,12 +33,10 @@ public class InputGestureHandler implements GestureDetector.GestureListener {
 
     @Override
     public boolean fling(float velocityX, float velocityY, int button) {
-        Vector2 vector2 = new Vector2(velocityX, velocityY);
-
-        final ActionThrow actionThrow = new ActionThrow(vector2.angle());
-        actionQueue.offer(actionThrow);
-
-        return true;
+        Vector2 speed = new Vector2(velocityX, velocityY);
+        actionQueue.peek().setSpeed(speed);
+        actionQueue.peek().setState(true);
+        return false;
     }
 
     @Override
